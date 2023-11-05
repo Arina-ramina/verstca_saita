@@ -5,29 +5,21 @@ from abc import ABC, abstractclassmethod
 import requests
 from dotenv import load_dotenv
 
-"""Файл для хранения классов по работе с api"""
-
 
 class Api(ABC):
-    """
-    Абстрактный класс - база
-    """
 
     @abstractclassmethod
-    def __init__(cls):
+    def __init__(self):
         pass
 
     @abstractclassmethod
-    def get_vacancies(cls, word: object) -> object:
+    def get_vacancies(self, word: object):
         pass
 
 
 class HhApi(Api):
-    """
-    Класс для работы с апи на hh.ru
-    """
 
-    def __init__(self, count) -> None:
+    def __init__(self, count):
         """
         Конструктор с входным параметром количество вакансий, который устанавливает параметры для гет-запросов
         """
@@ -40,18 +32,15 @@ class HhApi(Api):
 
     def get_vacancies(self, words):
         """
-        Метод для получения вакансий и преобразования их из json в словари
+        Метод получения вакансий и преобразования их из json в словари
         """
         self.params['text'] = words
         r = requests.get(self.url, params=self.params)
-        vacancies = json.loads(r.text)['items']
+        vacancies = json.loads(r.text)["items"]
         return vacancies
 
 
 class SuperJobApi(Api):
-    """
-    Класс для работы с апи на superjob.ru
-    """
 
     def __init__(self, count):
         """
@@ -67,7 +56,7 @@ class SuperJobApi(Api):
         self.params = {
             'count': count,
             'page': 1,
-            'town': 'Moscow',
+            'town': 'Moscow'
         }
         self.url = 'https://api.superjob.ru/2.0/vacancies/'
 
@@ -75,7 +64,7 @@ class SuperJobApi(Api):
         """
         Метод для получения вакансий и преобразования их из json в словари
         """
-        self.params['keywords'] = words
+        self.params['reywords'] = words
         r = requests.get(self.url, params=self.params, headers=self.headers)
         vacancies = json.loads(r.text)['objects']
         return vacancies
