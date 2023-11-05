@@ -14,7 +14,6 @@ class Vacancy:
         self.pay = pay
         self.requirement = requirement
 
-
     def to_json(self):
         """
         Метод, который возвращает информацию о вакансии в виде словаря
@@ -26,14 +25,12 @@ class Vacancy:
             'requirement': self.requirement,
         }
 
-
     @classmethod
     def from_json(cls, params):
         """
         КлассМетод, который создает вакансию на основе словаря
         """
         return cls(params['title'], params['url'], params['pay'], params['requirement'])
-
 
     @classmethod
     def all_from_json(cls):
@@ -47,7 +44,6 @@ class Vacancy:
             tmp = Vacancy.from_json(vacancy)
             output.append(tmp)
         return output
-
 
     def show_info(self):
         """
@@ -80,7 +76,6 @@ class VacancyAgent:
             output.append(tmp)
         return output
 
-
     @staticmethod
     def pars_hh_ru(vacancies):
         """
@@ -101,7 +96,6 @@ class VacancyAgent:
             output.append(tmp)
         return output
 
-
     @staticmethod
     def filter_vacancies_by_keywords(vacancies: list, key_words=None):
         """
@@ -121,7 +115,6 @@ class VacancyAgent:
                     output.append(vacancy.title)
                     break
         return output
-
 
     @staticmethod
     def filter_vacancies_by_salary(vacancies: list, sfrom, sto):

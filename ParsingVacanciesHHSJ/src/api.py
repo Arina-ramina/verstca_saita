@@ -1,6 +1,6 @@
 import json
 import os
-from abc import ABC, abstractclassmethod
+from abc import ABC, abstractmethod
 
 import requests
 from dotenv import load_dotenv
@@ -8,11 +8,11 @@ from dotenv import load_dotenv
 
 class Api(ABC):
 
-    @abstractclassmethod
+    @abstractmethod
     def __init__(self):
         pass
 
-    @abstractclassmethod
+    @abstractmethod
     def get_vacancies(self, word: object):
         pass
 

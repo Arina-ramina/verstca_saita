@@ -25,7 +25,6 @@ class JsonAgent:
 
         return True  # Вакансии с такими данными нет, можно добавить.
 
-
     @staticmethod
     def add_vacancy(vacancy: Vacancy):
         """
@@ -56,7 +55,6 @@ class JsonAgent:
             print("Произошла ошибка при добавлении вакансии")
             return False
 
-
     @staticmethod
     def delete_vacancy_by_title(title):
         """
@@ -65,7 +63,7 @@ class JsonAgent:
         """
         try:
             with open(FILE, 'r', encoding='utf-8') as f:
-                vacancies = json.load()
+                vacancies = json.load(f)
         except (FileNotFoundError, json.JSONDecodeError):
             print("Произошла ошибка при загрузке вакансий.")
             return False
@@ -83,8 +81,6 @@ class JsonAgent:
         else:
             return False
 
-
-
     @staticmethod
     def show_vacancies_title():
         """
@@ -101,7 +97,6 @@ class JsonAgent:
         except (FileNotFoundError, json.JSONDecodeError):
             print("Произошла ошибка при загрузке вакансий.")
 
-
     @staticmethod
     def clear_json():
         """
@@ -109,7 +104,6 @@ class JsonAgent:
         """
         with open(FILE, 'w', encoding='utf-8') as f:
             json.dump([], f, ensure_ascii=False)
-
 
     @staticmethod
     def show_info_by_title():
@@ -119,6 +113,6 @@ class JsonAgent:
         with open(FILE, 'r', encoding='utf-8') as f:
             vacancies = Vacancy.all_from_json(f)
         for vacancy in vacancies:
-            if vacancy.title == title:
+            if vacancy.title == 'title':
                 vacancy.show_info()
                 break
